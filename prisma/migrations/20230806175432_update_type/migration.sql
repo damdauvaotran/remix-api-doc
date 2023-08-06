@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Note` MODIFY `body` LONGTEXT NOT NULL;

@@ -7,9 +7,12 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import { parse } from "@stoplight/yaml";
 
 import { deleteNote, getNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
+import type { ConvertOutputOptions } from "swagger2openapi";
+import converter from "swagger2openapi";
 
 export const loader = async ({ params, request }: LoaderArgs) => {
   const userId = await requireUserId(request);
@@ -22,6 +25,7 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   return json({ note });
 };
 
+// Action of form submission is handled here
 export const action = async ({ params, request }: ActionArgs) => {
   const userId = await requireUserId(request);
   invariant(params.noteId, "noteId not found");
@@ -33,6 +37,7 @@ export const action = async ({ params, request }: ActionArgs) => {
 
 export default function NoteDetailsPage() {
   const data = useLoaderData<typeof loader>();
+
 
   return (
     <div>

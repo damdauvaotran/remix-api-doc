@@ -24,4 +24,11 @@ export default defineConfig({
       return { ...config, ...configOverrides };
     },
   },
+
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+    },
+  },
 });
